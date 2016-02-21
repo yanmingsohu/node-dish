@@ -1,0 +1,61 @@
+<html>
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+</head>
+<body>
+<style>
+h5 {
+  background-color: #eee;
+}
+</style>
+
+<h5>GET</h5>
+<form action='http://localhost:88/server/test' method='get' target='testif'>
+  i:<input name='i' value='9'/>
+  user:<input name='user' value='jym'/>
+  f:<input name='f' value='8'/>
+  email: <input name='em' value='abc@ddd.com'/>
+  <input type='submit'/>
+</form>
+
+<h5>POST</h5>
+<form action='http://localhost:88/server/test' method='post' target='testif'>
+  i:<input name='i' value='2'/>
+  user:<input name='user' value='jym1'/>
+  f:<input name='f' value='3'/>
+  <input type='submit'/>
+</form>
+
+<h5>Up files</h5>
+<form action='http://localhost:88/server/file' method='post' target='testif' enctype='multipart/form-data'>
+  f1:<input name='f1' type='file' multiple="multiple"/>
+  f2:<input name='f2' type='file'/>
+  v1:<input name='v1' value='abc'/>
+  v2:<input name='v2' value='abc'/>
+  <input type='submit'/>
+</form>
+
+
+<h5>SET cookie</h5>
+<form action='http://localhost:88/server/set_cookie' target='testif'>
+  <input type='submit'/>
+</form>
+
+
+<h5>GET cookie</h5>
+<form action='http://localhost:88/server/get_cookie' target='testif'>
+  <input type='submit'/>
+</form>
+
+<h5>Session</h5>
+<form action='http://localhost:88/server/session' target='testif'>
+  留空可以看之前输入的值:
+  <input name='a'/>
+  <input type='submit'/>
+</form>
+
+<h5>Result:</h5>
+<iframe name='testif' style='width: 90%'></iframe>
+
+</body>
+</html>
