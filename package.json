@@ -1,11 +1,10 @@
 {
     "name": "dish-lib",
-    "version": "0.0.20",
+    "version": "0.0.21",
     "description": "service framework",
     "main": "index.js",
     "scripts": {
-        "test": "node test/demo",
-        "prepublish": "node -e \"try{require('ver--1')();}catch(e){}\" "
+        "test": "node test/demo"
     },
     "repository": {
         "type": "git",

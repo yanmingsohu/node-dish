@@ -86,8 +86,8 @@ server.listen(88);
     - 作用: 验证 GET 参数
 
 * session
-    - 参数: [ story: Object, pass: String, cookieGetter: 见 cookie 的说明 ]
-    - 作用: 在 request 上绑定一个 session 的对象, 该对象上可以绑定属性; story 是一个对象必须导出 set/get 方法用于 session 持久化, 如果 story 为空, 默认使用内存保持 session; pass 用于签名 session, 提供一个持久化但有一个变更策略的签名, 可以在应用重启后保持之前的 session 有效, 又不会让安全性降低, 默认每次重启都会改变 pass, 所有用户都会重新登录; 使用 `nsessionid` 作为 cookie 名称;
+    - 参数: [ story: Object, pass: String, cookieGetter: 见 cookie 的说明, cookieName: 'nsessionid' ]
+    - 作用: 在 request 上绑定一个 session 的对象, 该对象上可以绑定属性; story 是一个对象必须导出 set/get 方法用于 session 持久化, 如果 story 为空, 默认使用内存保持 session; pass 用于签名 session, 提供一个持久化但有一个变更策略的签名, 可以在应用重启后保持之前的 session 有效, 又不会让安全性降低, 默认每次重启都会改变 pass, 所有用户都会重新登录; 使用 `nsessionid` 作为 cookie 名称, 通过设置 'cookieName' 参数可以改变 cookie;
 
 * cookie
     - 参数: [ cookieGetter: Function ]
