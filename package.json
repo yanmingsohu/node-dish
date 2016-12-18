@@ -1,6 +1,6 @@
 {
     "name": "dish-lib",
-    "version": "0.0.21",
+    "version": "0.0.24",
     "description": "service framework",
     "main": "index.js",
     "scripts": {

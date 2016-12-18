@@ -1,5 +1,6 @@
-var d = require('./lib/dish.js');
-var f = require('./lib/filter.js');
+var d  = require('./lib/dish.js');
+var f  = require('./lib/filter.js');
+var ss = require('./lib/session-story.js');
 
 //
 // 加载默认过滤器
@@ -14,5 +15,6 @@ module.exports = {
   create        : d.create,
   call_stack    : d.call_stack,
   filter        : f.set,
-  session_story : require('./lib/session-story.js'),
+  session_story : ss,
+  session_store : ss,
 };

@@ -159,7 +159,7 @@ function filter_string(filter_conf, service_context) {
 
 ## session 持久化策略
 
-  session 过滤器的预置 story 可以通过 `dish.session_story.xxx()` 创建, 创建出的实例在声明 session 过滤器时传递给 story 参数; 持久化策略返回的过期数据由框架忽略, 但是过期数据由策略自己清除;
+  session 过滤器的预置 story 可以通过 `dish.session_store` 中的方法创建, 创建出的实例在声明 session 过滤器时传递给 story 参数; 持久化策略返回的过期数据由框架忽略, 但是过期数据由策略自己清除;
   当前支持如下持久化策略:
 
 
