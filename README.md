@@ -64,6 +64,17 @@ var server = http.createServer(container);
 // 启动服务后, 访问 http://localhost:88/server/test?user=jym
 //
 server.listen(88);
+
+//
+// 返回所有服务的信息, 包括服务名服务路径和过滤器配置, 过滤器的敏感信息
+// 应该在过滤器初始化后删除. 如果传入一个 arr 则在这个 arr 上附加信息.
+//
+var arr = container.serviceList([arr]);
+
+//
+// 挂载到 mixer 中
+//
+container.forMixer(app_pool);
 ```
 
 
@@ -100,7 +111,7 @@ server.listen(88);
     - 作用: 默认自动按照请求中 `content-type` 指定的类型来处理, 如果指定了 format 参数, 则强制按照 format 类型来执行, 两者都无法确定, 则按 buf 处理. 解析的结果默认绑定到 request.body.
       + `form` 按表单来解析, 结果附加在 request.query
       + `json` 按 json 字符串来解析
-      + `xml`  解析 xml 转换为 json
+      + `xml`  解析 xml 转换为 json (! 这个方法依赖 xson-lib, 它的解析器有bug, 不推荐使用)
       + `buf`  结果是一个 Buffer 对象
 
 * upfile

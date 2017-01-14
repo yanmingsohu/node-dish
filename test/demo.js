@@ -1,9 +1,11 @@
 var http = require('http');
 var dish = require('../index');
+var logger = require('logger-lib')('demo');
 
 var session_pass = 'fewinv9325ug';
 var context   = { i:1, bac:'>' };
 var container = dish.create('/server', context);
+var port = 88;
 
 //
 // 打开 http://localhost:88/server/test?page=1 进入测试页
@@ -73,5 +75,10 @@ function jump(req, resp) {
 }
 
 
+// logger.log(container.serviceList());
+logger.log(container+'')
+
+
 var server = http.createServer(container);
-server.listen(88);
+server.listen(port);
+logger.log('server at http://localhost:'+ port + '/server/jump');
