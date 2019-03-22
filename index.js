@@ -12,6 +12,7 @@ require('./lib/f-cookie.js')(f);
 
 
 module.exports = {
+  className     : 'DishLib',
   create        : d.create,
   call_stack    : d.call_stack,
   filter        : f.set,

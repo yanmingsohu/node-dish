@@ -26,7 +26,8 @@ var context = { i:1 };
 
 //
 // [可选的] nextor 会创建一个回调函数, 服务函数调用 next() 时,
-// 即调用这个创建的回调函数
+// 即调用这个创建的回调函数,
+// 默认实现支持 jsonp, 在参数中提供 cb 参数, 会将返回的 json 用 cb 提供的函数名填充.
 //
 var nextor = function(req, resp) {
     return Function(err, data) {};
@@ -81,20 +82,24 @@ container.forMixer(app_pool);
 ### 可用过滤器
 
 * string
-    - 参数: [ min: 最小长度, max: 最大长度, name: 在 query 中的参数名 ]
+    - 参数: [ min: 最小长度, max: 最大长度, name: 在 query 中的参数名, allow_null: 允许空值, desc: 描述 ]
     - 作用: 验证 GET 参数
 
 * integer
-    - 参数: [ min: 最小值, max: 最大值, name: 在 query 中的参数名 ]
+    - 参数: [ min: 最小值, max: 最大值, name: 在 query 中的参数名, allow_null: 允许空值, desc: 描述 ]
     - 作用: 验证 GET 参数
 
 * float
-    - 参数: [ min: 最小值, max: 最大值, name: 在 query 中的参数名 ]
+    - 参数: [ min: 最小值, max: 最大值, name: 在 query 中的参数名, allow_null: 允许空值, desc: 描述 ]
     - 作用: 验证 GET 参数
 
 * email
-    - 参数: [ name: 在 query 中的参数名 ]
+    - 参数: [ name: 在 query 中的参数名, allow_null: 允许空值, desc: 描述 ]
     - 作用: 验证 GET 参数
+
+* set
+    - 参数: [ name: 在 query 中的参数名, allow_null: 允许空值, desc: 描述, set: Set/Array/Map/Object 作为集合用于验证 ]
+    - 作用: 验证 GET 参数, 是否在集合中.
 
 * session
     - 参数: [ story: Object, pass: String, cookieGetter: 见 cookie 的说明, cookieName: 'nsessionid' ]
@@ -140,6 +145,17 @@ container.forMixer(app_pool);
     - 参数: 无
     - 作用: 在日志中记录请求花费的时间
 
+* json
+    - 参数: 无
+    - 作用: 在 response 上绑定 Function json(obj) 调用后将 obj 转化为 json 输出到客户端, 之后不要再次调用任何输出方法.
+
+* regexp
+    - 参数: [ reg: 正则表达式, name: 在 query 中的参数名, err: 不符合表达式时的出错消息 ]
+
+* meta
+    - 参数: [ desc: '接口描述' ]
+    - 作用: 如果请求中有 meta 参数则返回 meta, 否则正常执行服务.
+
 
 ## 自定义过滤器
 
@@ -153,8 +169,12 @@ dish.filter(filter_string [, 'filter-type']);
 //
 // 过滤器创建器
 // service_context -- 服务的上下文, 在这个服务上的所有请求都是基于这个上下文
+// service_info    -- 在过滤器中获取服务相关数据
+//    getServiceName()  返回服务名称.
+//    getServicePath()  返回容器根路径 + 服务名称.
+//    getFilterConfig() 返回所有过滤器的配置数组.
 //
-function filter_string(filter_conf, service_context) {
+function filter_string(filter_conf, service_context, service_info) {
   //
   // 返回一个创建好的过滤器函数
   // 这个闭包可以设置该服务上下文使用的变量
