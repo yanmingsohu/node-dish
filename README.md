@@ -8,7 +8,6 @@
 
 `npm install --save dish-lib` 
 
-该项目没有加入 npm 公共服务器中, 请自行搞定...
 
 
 ## Usage
